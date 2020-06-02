@@ -41,15 +41,13 @@ function App() {
   const openPopup = id => {
     axios(apiurl + "&i=" + id).then(({data}) =>{
       let result = data;
-      console.log(result)
       setState(prevState => {
         return { ...prevState, selected: result }
       })
     })
   }
 
-  let res = state.results.map(result => {
-    if(result){
+  const res = state.results.map(result => {    
       return (
         <TouchableHighlight 
           key={result.imdbID} 
@@ -67,8 +65,7 @@ function App() {
             <Text style={styles.heading}>{result.Title}</Text>
           </View>
         </TouchableHighlight>
-      )
-    }
+      )   
   })
 
   return (
@@ -77,7 +74,6 @@ function App() {
       <TextInput 
         style={styles.searchBox}
         onChangeText={text => setState(prevState => {
-          console.log(text)
           return {...prevState, s: text}
         })}
         onSubmitEditing={search}
